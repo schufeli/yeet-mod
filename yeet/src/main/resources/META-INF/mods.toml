@@ -1,0 +1,24 @@
+modLoader="javafml" #mandatory
+loaderVersion="[43,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+license="All rights reserved"
+
+[[mods]] #mandatory
+modId="yeetmod" #mandatory
+version="${file.jarVersion}" #mandatory
+displayName="Yeet Survival Mod" #mandatory
+logoFile="yeetmod.png" #optional
+credits="Thanks for this example mod goes to Java" #optional
+authors="Love, Cheese and small house plants" #optional
+
+[[dependencies.examplemod]] #optional
+    modId="forge" #mandatory
+    mandatory=true #mandatory
+    versionRange="[43,)" #mandatory
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.examplemod]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.19.2,1.20)"
+    ordering="NONE"
+    side="BOTH"
