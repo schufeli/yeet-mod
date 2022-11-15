@@ -3,7 +3,6 @@ package codes.schufi.yeetmod.util.inventory;
 import codes.schufi.yeetmod.api.item.YeetItems;
 import codes.schufi.yeetmod.core.YeetMod;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 
