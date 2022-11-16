@@ -4,8 +4,10 @@ import java.util.function.Supplier;
 
 import codes.schufi.yeetmod.core.YeetMod;
 import codes.schufi.yeetmod.api.item.YeetItems;
+import codes.schufi.yeetmod.item.DirtyWaterBottleItem;
 import codes.schufi.yeetmod.item.EmptyCanteenItem;
 import codes.schufi.yeetmod.item.FilledCanteenItem;
+import codes.schufi.yeetmod.item.PurifiedWaterBottleItem;
 import codes.schufi.yeetmod.util.inventory.ItemGroupYeet;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
@@ -30,6 +32,14 @@ public class ModItems {
 
         YeetItems.PURIFIED_WATER_CANTEEN = register("purified_water_canteen", () -> {
             return new FilledCanteenItem(new Item.Properties().durability(5).tab(ItemGroupYeet.INSTANCE));
+        });
+
+        YeetItems.DIRTY_WATER_BOTTLE = register("dirty_water_bottle", () -> {
+            return new DirtyWaterBottleItem(new Item.Properties().stacksTo(1).tab(ItemGroupYeet.INSTANCE));
+        });
+
+        YeetItems.PURIFIED_WATER_BOTTLE = register("purified_water_bottle", () -> {
+            return new PurifiedWaterBottleItem(new Item.Properties().stacksTo(1).tab(ItemGroupYeet.INSTANCE));
         });
 
         YeetItems.YEET_ICON = register("yeet_icon", () -> {

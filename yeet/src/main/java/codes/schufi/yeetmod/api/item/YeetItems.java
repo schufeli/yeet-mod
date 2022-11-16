@@ -8,5 +8,7 @@ public class YeetItems {
     public static RegistryObject<Item> WATER_CANTEEN;
     public static RegistryObject<Item> DIRTY_WATER_CANTEEN;
     public static RegistryObject<Item> PURIFIED_WATER_CANTEEN;
+    public static RegistryObject<Item> DIRTY_WATER_BOTTLE;
+    public static RegistryObject<Item> PURIFIED_WATER_BOTTLE;
     public static RegistryObject<Item> YEET_ICON;
 }
