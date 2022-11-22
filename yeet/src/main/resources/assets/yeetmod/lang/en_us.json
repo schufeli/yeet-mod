@@ -6,5 +6,7 @@
     "item.yeetmod.dirty_water_canteen": "Dirty Water Canteen",
     "item.yeetmod.purified_water_canteen": "Purified Water Canteen",
     "item.yeetmod.dirty_water_bottle": "Dirty Water Bottle",
-    "item.yeetmod.purified_water_bottle": "Purified Water Bottle"
+    "item.yeetmod.purified_water_bottle": "Purified Water Bottle",
+
+    "block.yeetmod.rain_collector": "Rain Collector"
 }
