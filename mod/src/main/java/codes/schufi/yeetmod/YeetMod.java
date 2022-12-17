@@ -1,6 +1,8 @@
 package codes.schufi.yeetmod;
 
 import com.mojang.logging.LogUtils;
+
+import codes.schufi.yeetmod.init.ModItems;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -17,6 +19,8 @@ public class YeetMod {
 
     public YeetMod() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModItems.register(bus);
 
         bus.addListener(this::commonSetup);
 
