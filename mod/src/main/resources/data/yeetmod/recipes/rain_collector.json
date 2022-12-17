@@ -1,0 +1,29 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "iWi",
+        "OBO",
+        "DDD"
+    ],
+    "key": {
+        "i": {
+            "item": "minecraft:iron_ingot"
+        },
+        "W": {
+            "item": "minecraft:white_wool"
+        },
+        "O": {
+            "item": "minecraft:oak_log"
+        },
+        "B": {
+            "item": "minecraft:bucket"
+        },
+        "D": {
+            "item": "minecraft:oak_planks"
+        }   
+    },
+    "result": {
+        "item":"yeetmod:rain_collector",
+        "count": 1
+    }
+}
