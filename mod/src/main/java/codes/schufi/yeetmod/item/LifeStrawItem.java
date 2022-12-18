@@ -23,7 +23,7 @@ public class LifeStrawItem extends Item {
     public LifeStrawItem(Item.Properties properties) {
         super(properties);
     }
-
+    
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
