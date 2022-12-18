@@ -34,6 +34,16 @@ First, you need to configure the project. To do this, simply open VSCode if you 
 ./gradlew
 ```
 
+### Run Gradle task for IDE setup (autocompletion etc,)
+
+Navigate to the Gradle extension in VSCode and run the following task:
+
+```
+Tasks > ide > eclipse
+```
+
+*You won't have to use Eclipse; it is only used to download all files needed for efficient development.*
+
 ## :label: Contributors
 
 - [schufeli](https://github.com/schufeli)
