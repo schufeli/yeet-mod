@@ -1,0 +1,26 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#/#",
+        "WCW",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:green_wool"
+        },
+        "/": {
+            "item": "minecraft:stick"
+        },
+        "W": {
+            "item": "minecraft:white_wool"
+        },
+        "C": {
+            "item": "minecraft:coal"
+        }
+    },
+    "result": {
+        "item":"yeetmod:life_straw",
+        "count": 1
+    }
+}
