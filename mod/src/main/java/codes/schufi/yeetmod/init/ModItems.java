@@ -18,10 +18,10 @@ public class ModItems {
 
     // Custom Mod Items
     public static final RegistryObject<Item> DIRTY_BOTTLE = MOD_ITEMS.register("dirty_bottle", 
-        () -> new DirtyBottleItem(new Item.Properties().stacksTo(1).durability(1).tab(YeetCreativeModeTab.YEET_TAB)));
+        () -> new DirtyBottleItem(new Item.Properties().stacksTo(1).tab(YeetCreativeModeTab.YEET_TAB)));
 
     public static final RegistryObject<Item> WATER_BOTTLE = MOD_ITEMS.register("water_bottle",
-        () -> new WaterBottleItem(new Item.Properties().stacksTo(1).durability(1).tab(YeetCreativeModeTab.YEET_TAB)));
+        () -> new WaterBottleItem(new Item.Properties().stacksTo(1).tab(YeetCreativeModeTab.YEET_TAB)));
 
     public static final RegistryObject<Item> LIFE_STRAW = MOD_ITEMS.register("life_straw", 
         () -> new LifeStrawItem(new Item.Properties().stacksTo(1).durability(10).tab(YeetCreativeModeTab.YEET_TAB)));
