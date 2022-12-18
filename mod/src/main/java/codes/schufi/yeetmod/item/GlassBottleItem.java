@@ -17,7 +17,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.server.command.ModIdArgument;
 
 public class GlassBottleItem extends Item {
     public GlassBottleItem(Item.Properties properties) {
