@@ -1,6 +1,8 @@
 package codes.schufi.yeetmod.item;
 
+import codes.schufi.yeetmod.client.ClientThirstData;
 import codes.schufi.yeetmod.init.ModItems;
+import codes.schufi.yeetmod.thirst.ThirstProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -45,6 +47,11 @@ public class LifeStrawItem extends Item {
 
         if (player == null)
             return stack;
+
+        player.getCapability(ThirstProvider.THIRST).ifPresent(thirst -> {
+            thirst.addThirst(1);
+            ClientThirstData.add(1);
+        });
 
         player.awardStat(Stats.ITEM_USED.get(this));
 

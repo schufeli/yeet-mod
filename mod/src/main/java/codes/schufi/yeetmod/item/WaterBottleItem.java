@@ -1,5 +1,8 @@
 package codes.schufi.yeetmod.item;
 
+import codes.schufi.yeetmod.client.ClientThirstData;
+import codes.schufi.yeetmod.thirst.Thirst;
+import codes.schufi.yeetmod.thirst.ThirstProvider;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
@@ -27,17 +30,22 @@ public class WaterBottleItem extends Item {
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
         Player player = livingEntity instanceof Player ? (Player) livingEntity : null;
-        if (player == null) {
+
+        if (player == null)
             return stack;
-        }
-        if (player instanceof ServerPlayer) {
-            CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) player, stack);
-        }
+
+        player.getCapability(ThirstProvider.THIRST).ifPresent(thirst -> {
+            thirst.addThirst(1);
+            ClientThirstData.add(1);
+        });
+
         player.awardStat(Stats.ITEM_USED.get(this));
         stack.shrink(1);
+
         if (stack.isEmpty()) {
             return new ItemStack(Items.GLASS_BOTTLE);
         }
+
         player.getInventory().add(new ItemStack(Items.GLASS_BOTTLE));
         return stack;
     }
