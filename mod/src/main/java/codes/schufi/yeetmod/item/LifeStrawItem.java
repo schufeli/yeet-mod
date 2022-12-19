@@ -13,6 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
+import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
@@ -32,16 +33,10 @@ public class LifeStrawItem extends Item {
         if (hitResult.getType() == HitResult.Type.BLOCK) {
             BlockPos pos = ((BlockHitResult) hitResult).getBlockPos();
             if (level.mayInteract(player, pos) && level.getFluidState(pos).is(FluidTags.WATER)) {
-                level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.GENERIC_DRINK, SoundSource.NEUTRAL, 1.0f, 1.0f);
-                return InteractionResultHolder.sidedSuccess(replace(stack, player, new ItemStack((ItemLike) ModItems.LIFE_STRAW.get())), level.isClientSide());
+                return ItemUtils.startUsingInstantly(level, player, hand);
             }
         }
-        return ItemUtils.startUsingInstantly(level, player, hand);
-    }
-
-    protected ItemStack replace(ItemStack old, Player player, ItemStack next) {
-        player.awardStat(Stats.ITEM_USED.get(this));
-        return ItemUtils.createFilledResult(old, player, next);
+        return InteractionResultHolder.fail(stack);
     }
 
     @Override
@@ -66,6 +61,11 @@ public class LifeStrawItem extends Item {
     @Override
     public int getUseDuration(ItemStack stack) {
         return 32;
+    }
+
+    @Override
+    public UseAnim getUseAnimation(ItemStack stack) {
+        return UseAnim.DRINK;
     }
 
     @Override
