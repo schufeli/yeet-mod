@@ -1,11 +1,8 @@
 package codes.schufi.yeetmod.item;
 
-import codes.schufi.yeetmod.init.ModItems;
-import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,12 +10,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.UseAnim;
-import net.minecraft.world.level.ClipContext;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
 
 public class WaterBottleItem extends Item {
     public WaterBottleItem(Item.Properties properties) {
@@ -27,43 +21,24 @@ public class WaterBottleItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-        HitResult hitResult = getPlayerPOVHitResult(level, player, ClipContext.Fluid.SOURCE_ONLY);
-
-        if (hitResult.getType() == HitResult.Type.BLOCK) {
-            BlockPos pos = ((BlockHitResult) hitResult).getBlockPos();
-
-            if (level.mayInteract(player, pos) && level.getFluidState(pos).is(FluidTags.WATER)) {
-                level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1.0f, 1.0f);
-                return InteractionResultHolder.sidedSuccess(replace(stack, player, new ItemStack((ItemLike) ModItems.WATER_BOTTLE.get())), level.isClientSide());
-            }
-        }
-
         return ItemUtils.startUsingInstantly(level, player, hand);
-    }
-
-    protected ItemStack replace(ItemStack old, Player player, ItemStack next) {
-        player.awardStat(Stats.ITEM_USED.get(this));
-        return ItemUtils.createFilledResult(old, player, next);
     }
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
         Player player = livingEntity instanceof Player ? (Player) livingEntity : null;
-
-        if (player == null)
+        if (player == null) {
             return stack;
-
-        player.awardStat(Stats.ITEM_USED.get(this));
-
-        if (!player.getAbilities().instabuild) {
-            boolean[] broken = { false };
-            stack.hurtAndBreak(1, player, entity -> { broken[0] = true; });
-
-            if (broken[0])
-                return new ItemStack((ItemLike) ModItems.EMPTY_BOTTLE.get());
         }
-
+        if (player instanceof ServerPlayer) {
+            CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) player, stack);
+        }
+        player.awardStat(Stats.ITEM_USED.get(this));
+        stack.shrink(1);
+        if (stack.isEmpty()) {
+            return new ItemStack(Items.GLASS_BOTTLE);
+        }
+        player.getInventory().add(new ItemStack(Items.GLASS_BOTTLE));
         return stack;
     }
 
@@ -75,10 +50,5 @@ public class WaterBottleItem extends Item {
     @Override
     public UseAnim getUseAnimation(ItemStack stack) {
         return UseAnim.DRINK;
-    }
-
-    @Override
-    public boolean isEnchantable(ItemStack stack) {
-        return false;
     }
 }
