@@ -1,10 +1,12 @@
 # Yeet Mod
 
+![Mod Showcase](image/showcase.png)
+
 Minecraft Survival Mod that adds a basic drinking and hydration system that has been completely over-engineered to be a project for school.
 
 ## :package: Installation
 
-Will be added soon!
+To install a mod, follow this [guide](https://www.wikihow.com/Install-Minecraft-Mods-Using-Minecraft-Forge).
 
 ## :hammer_and_wrench: Development
 
