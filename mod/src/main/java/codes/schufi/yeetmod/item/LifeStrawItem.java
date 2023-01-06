@@ -1,11 +1,10 @@
 package codes.schufi.yeetmod.item;
 
-import codes.schufi.yeetmod.client.ClientThirstData;
-import codes.schufi.yeetmod.init.ModItems;
-import codes.schufi.yeetmod.thirst.ThirstProvider;
+import codes.schufi.yeetmod.network.DrinkInWorld;
+import codes.schufi.yeetmod.network.ModMessages;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
@@ -48,10 +47,9 @@ public class LifeStrawItem extends Item {
         if (player == null)
             return stack;
 
-        player.getCapability(ThirstProvider.THIRST).ifPresent(thirst -> {
-            thirst.addThirst(1);
-            ClientThirstData.add(1);
-        });
+        if (player instanceof ServerPlayer) {
+            ModMessages.sendToServer(new DrinkInWorld());
+        }
 
         player.awardStat(Stats.ITEM_USED.get(this));
 

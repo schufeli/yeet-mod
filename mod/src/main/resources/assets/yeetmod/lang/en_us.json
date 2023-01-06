@@ -5,5 +5,7 @@
     "item.yeetmod.water_bottle": "Water Bottle",
     "item.yeetmod.life_straw": "Life Straw",
 
-    "block.yeetmod.rain_collector": "Rain Collector"
+    "block.yeetmod.rain_collector": "Rain Collector",
+
+    "entity.minecraft.iron_golem": "Yeeti"
 }

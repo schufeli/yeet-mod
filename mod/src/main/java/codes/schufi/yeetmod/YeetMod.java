@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 
 import codes.schufi.yeetmod.init.ModBlocks;
 import codes.schufi.yeetmod.init.ModItems;
+import codes.schufi.yeetmod.network.ModMessages;
 import codes.schufi.yeetmod.proxy.ClientProxy;
 import codes.schufi.yeetmod.proxy.CommonProxy;
 import net.minecraftforge.common.MinecraftForge;
@@ -40,7 +41,9 @@ public class YeetMod {
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event) { }
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        ModMessages.register();
+    }
 
     private void loadComplete(FMLLoadCompleteEvent event) {
         event.enqueueWork(() -> {

@@ -2,6 +2,8 @@ package codes.schufi.yeetmod.event;
 
 import codes.schufi.yeetmod.YeetMod;
 import codes.schufi.yeetmod.client.ClientThirstData;
+import codes.schufi.yeetmod.network.ModMessages;
+import codes.schufi.yeetmod.network.ThirstDataSync;
 import codes.schufi.yeetmod.thirst.Thirst;
 import codes.schufi.yeetmod.thirst.ThirstProvider;
 import net.minecraft.resources.ResourceLocation;
@@ -49,7 +51,7 @@ public class ModEvents {
             event.player.getCapability(ThirstProvider.THIRST).ifPresent(thirst -> {
                 if(thirst.getThirst() > 0 && event.player.getRandom().nextFloat() < 0.001f) { // Once Every 10 Seconds on Avg
                     thirst.subThirst(1);
-                    ClientThirstData.set(thirst.getThirst());
+                    ModMessages.sendToPlayer(new ThirstDataSync(thirst.getThirst()), ((ServerPlayer) event.player));
                 }
             });
         }
@@ -59,7 +61,7 @@ public class ModEvents {
             if(event.getEntity() instanceof ServerPlayer player) {
                 player.getCapability(ThirstProvider.THIRST).ifPresent(thirst -> {
                     thirst.addThirst(10);
-                    ClientThirstData.set(thirst.getThirst());
+                    ModMessages.sendToPlayer(new ThirstDataSync(thirst.getThirst()), player);
                 });
             }
         }

@@ -1,5 +1,7 @@
 package codes.schufi.yeetmod.thirst;
 
+import net.minecraft.nbt.CompoundTag;
+
 public class Thirst {
     private int thirst;
     private final int MIN_THIRST = 0;
@@ -19,5 +21,13 @@ public class Thirst {
 
     public void copyFrom(Thirst source) {
         this.thirst = source.thirst;
+    }
+
+    public void saveNBTData(CompoundTag nbt) {
+        nbt.putInt("thirst", thirst);
+    }
+
+    public void loadNBTData(CompoundTag nbt) {
+        thirst = nbt.getInt("thirst");
     }
 }

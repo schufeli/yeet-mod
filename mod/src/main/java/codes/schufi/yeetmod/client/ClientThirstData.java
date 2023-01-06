@@ -7,10 +7,6 @@ public class ClientThirstData {
         ClientThirstData.playerThirst = thirst;
     }
 
-    public static void add(int thirst) {
-        playerThirst += thirst;
-    }
-
     public static int getPlayerThirst() {
         return playerThirst;
     }

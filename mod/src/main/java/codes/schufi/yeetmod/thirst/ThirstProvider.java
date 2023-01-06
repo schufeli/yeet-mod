@@ -1,15 +1,17 @@
 package codes.schufi.yeetmod.thirst;
 
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ThirstProvider implements ICapabilityProvider {
+public class ThirstProvider implements ICapabilityProvider, INBTSerializable<CompoundTag> {
     public static Capability<Thirst> THIRST = CapabilityManager.get(new CapabilityToken<Thirst>() { });
 
     private Thirst thirst = null;
@@ -30,5 +32,17 @@ public class ThirstProvider implements ICapabilityProvider {
         }
 
         return LazyOptional.empty();
+    }
+
+    @Override
+    public CompoundTag serializeNBT() {
+        CompoundTag nbt = new CompoundTag();
+        createPlayerThirst().saveNBTData(nbt);
+        return nbt;
+    }
+
+    @Override
+    public void deserializeNBT(CompoundTag nbt) {
+        createPlayerThirst().loadNBTData(nbt);
     }
 }

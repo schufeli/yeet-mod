@@ -1,9 +1,7 @@
 package codes.schufi.yeetmod.item;
 
-import codes.schufi.yeetmod.client.ClientThirstData;
-import codes.schufi.yeetmod.thirst.Thirst;
-import codes.schufi.yeetmod.thirst.ThirstProvider;
-import net.minecraft.advancements.CriteriaTriggers;
+import codes.schufi.yeetmod.network.DrinkInWorld;
+import codes.schufi.yeetmod.network.ModMessages;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -34,10 +32,9 @@ public class WaterBottleItem extends Item {
         if (player == null)
             return stack;
 
-        player.getCapability(ThirstProvider.THIRST).ifPresent(thirst -> {
-            thirst.addThirst(1);
-            ClientThirstData.add(1);
-        });
+        if (player instanceof ServerPlayer) {
+            ModMessages.sendToServer(new DrinkInWorld());
+        }
 
         player.awardStat(Stats.ITEM_USED.get(this));
         stack.shrink(1);
