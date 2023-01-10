@@ -8,6 +8,7 @@ import codes.schufi.yeetmod.thirst.Thirst;
 import codes.schufi.yeetmod.thirst.ThirstProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
@@ -53,6 +54,9 @@ public class ModEvents {
                     thirst.subThirst(1);
                     ModMessages.sendToPlayer(new ThirstDataSync(thirst.getThirst()), ((ServerPlayer) event.player));
                 }
+                if(thirst.getThirst() == 0 && event.player.getRandom().nextFloat() < 0.01f) {
+                    event.player.hurt(DamageSource.STARVE, 2f);
+                }
             });
         }
 
@@ -60,7 +64,6 @@ public class ModEvents {
         public static void onPlayerJoinWorld(EntityJoinLevelEvent event) {
             if(event.getEntity() instanceof ServerPlayer player) {
                 player.getCapability(ThirstProvider.THIRST).ifPresent(thirst -> {
-                    thirst.addThirst(10);
                     ModMessages.sendToPlayer(new ThirstDataSync(thirst.getThirst()), player);
                 });
             }
